@@ -5,6 +5,7 @@ import (
 	"go.uber.org/zap"
 	"io"
 	"net"
+	"strconv"
 	"strings"
 	"stroxy/config"
 	"stroxy/logger"
@@ -58,7 +59,7 @@ func (l *Listener) Listen() {
 			logger.PROD().Error("tcp访问监听失败", zap.Int("端口", l.localPort), zap.Error(err))
 			newPort := getFreePort()
 			l.localPort = newPort
-			config.ProductConfigGroup.SetConfigArg(config.ArgPort, string(rune(newPort)))
+			config.ProductConfigGroup.SetConfigArg(config.ArgPort, strconv.Itoa(newPort))
 			continue
 		}
 		l.server = conn

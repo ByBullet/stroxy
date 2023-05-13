@@ -1,10 +1,9 @@
 package main
 
 import (
+	"github.com/getlantern/systray"
 	"stroxy/boot"
 	"stroxy/config"
-
-	"github.com/getlantern/systray"
 )
 
 // 启动GUI系统托盘
@@ -37,15 +36,15 @@ func addNodeItem(mNode *systray.MenuItem) {
 }
 
 // 添加代理模式按钮，auto\all
-func addProxyModeItem() (autoProxyMenu, allPaoxyMenu *systray.MenuItem) {
+func addProxyModeItem() (autoProxyMenu, allProxyMenu *systray.MenuItem) {
 	mProxyMode := systray.AddMenuItem("代理模式", "代理模式")
-	allPaoxyMenu = mProxyMode.AddSubMenuItem("全局代理", "全局代理")
+	allProxyMenu = mProxyMode.AddSubMenuItem("全局代理", "全局代理")
 	autoProxyMenu = mProxyMode.AddSubMenuItem("智能代理", "智能代理")
 	switch config.ProductConfigGroup.ProxyModel {
 	case "auto":
 		autoProxyMenu.Disable()
 	case "all":
-		allPaoxyMenu.Disable()
+		allProxyMenu.Disable()
 	}
 	return
 }
@@ -62,7 +61,7 @@ func onReady() {
 	mNode := systray.AddMenuItem("切换节点", "切换节点")
 	addNodeItem(mNode)
 
-	autoProxyMenu, allPaoxyMenu := addProxyModeItem()
+	autoProxyMenu, allProxyMenu := addProxyModeItem()
 
 	mQuit := systray.AddMenuItem("退出", "退出程序")
 
@@ -81,10 +80,10 @@ func onReady() {
 				mStop.Disable()
 			case <-autoProxyMenu.ClickedCh:
 				autoProxyMenu.Disable()
-				allPaoxyMenu.Enable()
+				allProxyMenu.Enable()
 				boot.SelectProxyMode("auto")
-			case <-allPaoxyMenu.ClickedCh:
-				allPaoxyMenu.Disable()
+			case <-allProxyMenu.ClickedCh:
+				allProxyMenu.Disable()
 				autoProxyMenu.Enable()
 				boot.SelectProxyMode("all")
 			case <-mQuit.ClickedCh:

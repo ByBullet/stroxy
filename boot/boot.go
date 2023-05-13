@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 	"stroxy/config"
+	"stroxy/env"
 	"stroxy/local"
 	"stroxy/logger"
 	"stroxy/util"
@@ -14,6 +15,7 @@ var localServer *local.Listener
 
 func init() {
 	util.LockProcess()
+	env.LoadEnv()
 	//初始化logger设置
 	logger.Init()
 	//初始化配置文件

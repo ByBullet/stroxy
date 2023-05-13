@@ -4,7 +4,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"log"
-	"os"
+	"stroxy/env"
 )
 
 var prodLogger *zap.Logger
@@ -31,13 +31,13 @@ func Init() {
 		OutputPaths:      []string{"stdout"},
 		ErrorOutputPaths: []string{"stderr"},
 	}
-	if len(os.Args) > 1 {
-		switch os.Args[1] {
-		case "debug":
-			cfg.Development = true
-		default:
-			log.Fatalf("未知参数 %s,参数只能是release/debug\n", os.Args[1])
-		}
+
+	switch env.GetEnv().Mode {
+	case "debug":
+		cfg.Development = true
+	case "release":
+	default:
+		log.Fatalf("未知参数 %s,参数只能是release/debug\n", env.GetEnv().Mode)
 	}
 
 	prodLogger, err = cfg.Build()

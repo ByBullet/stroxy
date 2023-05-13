@@ -12,8 +12,8 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+	"stroxy/env"
 	"stroxy/logger"
-	"sync"
 )
 
 const (
@@ -24,27 +24,10 @@ const (
 	PathUnsettingProxy = "/script/unsetting.bat"
 )
 
-// 启动模式 debug/release
-var mode = "release"
-var once sync.Once
-
-func loadArgsOfMode() {
-	if len(os.Args) > 1 {
-		switch os.Args[1] {
-		case "release":
-			mode = os.Args[1]
-		case "debug":
-			mode = os.Args[1]
-		default:
-			log.Fatalf("未知参数 %s,参数只能是release/debug\n", os.Args[1])
-		}
-	}
-}
-
 // 获取项目所在根路径——main.go所在路径
 // 通过闭包缓存路径
 func getCurrentPath() func() string {
-	once.Do(loadArgsOfMode)
+	mode := env.GetEnv().Mode
 	var currentPath string
 	println(mode)
 	if mode == "debug" {
@@ -72,7 +55,7 @@ var GetCurrentPath = getCurrentPath()
 // GetFilePath
 // 获取所在项目的相对路径
 func GetFilePath(relativePath string) string {
-	return fmt.Sprintf("%s%s", GetCurrentPath(), relativePath)
+	return fmt.Sprintf("%s%s", env.GetEnv().WorkDir, relativePath)
 }
 
 // SettingProxy 设置代理
