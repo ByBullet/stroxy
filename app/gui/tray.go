@@ -52,8 +52,8 @@ func addProxyModeItem() (autoProxyMenu, allProxyMenu *systray.MenuItem) {
 func onReady() {
 	systray.SetTemplateIcon(Data, Data)
 
-	systray.SetTitle("Stream Proxy")
-	systray.SetTooltip("Stream Proxy")
+	systray.SetTitle("Stroxy")
+	systray.SetTooltip("Stroxy")
 
 	mRun := systray.AddMenuItem("启动", "启动")
 
