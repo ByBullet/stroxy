@@ -1,0 +1,30 @@
+{
+	"ProxyServerAddrTemplate": "wss://%s.masterliu.fun:%d/transter",
+	"ProxyOriginTemplate": "https://%s.masterliu.fun:%d",
+	"ProxyServerAddr": "wss://sp.masterliu.fun:1026/transter",
+	"ProxyOrigin": "https://sp.masterliu.fun:1026",
+	"ProxyServerMap": {
+		"新加坡": {
+			"Name": "",
+			"DomainPrefix": "sp",
+			"Port": 1026
+		},
+		"香港": {
+			"Name": "",
+			"DomainPrefix": "www",
+			"Port": 1026
+		}
+	},
+	"DefaultServer": "香港",
+	"LocalPort": 55555,
+	"ProxyModel": "all",
+	"SkipVerify": true,
+	"IpDate": "ip_2022-1-1.txt",
+	"WebsiteAddr": "http://localhost:8080",
+	"Auth": "cf61f8fd5a964c4782b54f0965e3aa7d",
+	"IgnoreAddress": [
+		"localhost",
+		"127.0.0.1",
+		"192.168.*"
+	]
+}

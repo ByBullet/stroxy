@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+        }
+
+        .container {
+            width: 400px;
+            height: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            /* border-radius: 50%; */
+        }
+
+        .form {
+            width: 80%;
+            height: 80%;
+            margin: auto;
+            padding-top: 20px;
+        }
+
+        .form h2 {
+            color: #4facfe;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form .input-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .form .input-box input {
+            width: 100%;
+            height: 40px;
+            padding-left: 10px;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid #4facfe;
+        }
+
+        .form .input-box span {
+            width: 40px;
+            height: 40px;
+            background: #4facfe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .form .input-box span i {
+            color: white;
+        }
+
+        .form .button {
+            width: 100%;
+            height: 40px;
+            margin-top: 20px;
+            background:#4facfe ;
+            border:none ;
+             border-radius :5 px ;
+             font-weight :bold ;
+             color :white ;
+             cursor :pointer ;
+         }
+          /* 添加错误提示样式 */
+          .error {
+             color :red ;
+             font-size :12 px ;
+             margin-top :5 px ;
+         }
+    </style>
+    <title>登录页面</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+           <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/78380/paper-airplane-clipart-md.png" alt="logo">
+       </div>
+       <div class="form">
+           <h2>登录</h2>
+           <p id="username-error" class="error"></p>
+
+           <div class="input-box">
+               <input type="text" id="username" placeholder="用户名">
+           </div>
+            <!-- 添加错误提示元素 -->
+            <p id="password-error" class="error"></p>
+
+           <div class="input-box">
+               <input type="password" id="password" placeholder="密码">
+           </div>
+            <!-- 添加错误提示元素 -->
+           <button class="button" onclick="validate()">登录</button>
+       </div>
+   </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" ></script>
+<script>
+       // 获取元素
+       var username = document.getElementById("username");
+       var password = document.getElementById("password");
+       var usernameError = document.getElementById("username-error");
+       var passwordError = document.getElementById("password-error");
+
+       // 定义验证函数
+       function validate() {
+           // 获取输入值
+           var usernameValue = username.value.trim();
+           var passwordValue = password.value.trim();
+
+           // 定义正则表达式
+           var emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+           // 定义标志变量
+           var isValid = true;
+
+           // 清空错误提示
+           usernameError.innerHTML = "";
+           passwordError.innerHTML = "";
+
+           // 验证用户名格式是否为邮箱
+           if (!emailRegex.test(usernameValue)) {
+               usernameError.innerHTML = "用户名格式不正确，必须是邮箱";
+               isValid = false; // 设置标志为false
+           }
+           //验证密码不能为空
+           if(passwordValue==""||passwordValue==undefined){
+               passwordError.innerHTML = "密码错不能为空";
+               isValid = false; // 设置标志为false
+           }
+           if(!isValid){
+                return; 
+           }
+
+           $.ajax({
+                method:"POST",
+                url:"/login",
+                contentType:"application/json",
+                data:JSON.stringify({username:usernameValue,password:passwordValue}),
+                success:function(resp){
+                    if(resp["code"]=="1"){
+                        alert("登录成功");
+                    }else{
+                        alert(resp["msg"]);
+                    }
+                }
+
+           })
+
+        }
+</script>
+</body>
+</html>
