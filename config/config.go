@@ -16,7 +16,7 @@ const (
 	ProxyModelAll  = "all"
 	ProxyModelAuto = "auto"
 
-	ArgPort          = "Port"
+	ArgPort          = "LocalPort"
 	ArgDefaultServer = "DefaultServer"
 )
 
@@ -56,6 +56,9 @@ func fileOperate(f func(file *os.File)) {
 func (cg *Group) SetConfigArg(argName, value string) {
 	valueOfCG := reflect.ValueOf(cg).Elem()
 	v := valueOfCG.FieldByName(argName)
+	if !v.IsValid() {
+		return
+	}
 	switch v.Type().Kind() {
 	case reflect.String:
 		v.SetString(value)
