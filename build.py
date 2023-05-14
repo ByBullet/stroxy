@@ -68,11 +68,11 @@ def zip_file(src_dir):
 
 if __name__ == "__main__":
     list = [
-        {"path": "win", "os": "windows", "plantform": "amd64", "args": '-ldflags "-H=windowsgui"'},
-        {"path": "mac", "os": "darwin", "plantform": "arm64"}
+        # {"path": "win", "os": "windows", "plantform": "amd64", "args": '-ldflags "-H=windowsgui"'},
+        # {"path": "mac", "os": "darwin", "plantform": "arm64","args": ""}
         # {"path":"linux","os":"linux","plantform":"amd64"},
-        # {"path":"mac_arm64","os":"darwin","plantform":"arm64"},
-        # {"path":"mac_amd64","os":"darwin","plantform":"amd64 "}
+        # {"path":"mac_arm64","os":"darwin","plantform":"arm64","args":""},
+        # {"path":"mac_amd64","os":"darwin","plantform":"amd64","args":""}
     ]
     current_directory = os.path.dirname(os.path.abspath(__file__))
     path = current_directory + "/build/"
