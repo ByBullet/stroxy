@@ -17,8 +17,8 @@ import (
 )
 
 const (
-	PathConfig = "/static/config.json" // 配置文件路径
-	PathIp     = "/static/ip.txt"      // ip范围文件路径
+	PathConfig = "/resources/config.json" // 配置文件路径
+	PathIp     = "/resources/ip.txt"      // ip范围文件路径
 
 	PathSettingProxy   = "/script/setting.bat"
 	PathUnsettingProxy = "/script/unsetting.bat"
