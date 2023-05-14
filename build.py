@@ -69,6 +69,7 @@ def zip_file(src_dir):
 if __name__ == "__main__":
     list = [
         {"path": "win", "os": "windows", "plantform": "amd64", "args": '-ldflags "-H=windowsgui"'},
+        {"path": "mac", "os": "darwin", "plantform": "arm64"}
         # {"path":"linux","os":"linux","plantform":"amd64"},
         # {"path":"mac_arm64","os":"darwin","plantform":"arm64"},
         # {"path":"mac_amd64","os":"darwin","plantform":"amd64 "}
