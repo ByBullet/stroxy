@@ -9,55 +9,11 @@ import (
 	"path/filepath"
 	"runtime"
 	"strconv"
-	"strings"
-	"stroxy/env"
 	"stroxy/logger"
 
 	"github.com/nightlyone/lockfile"
 	"go.uber.org/zap"
 )
-
-const (
-	PathConfig = "/resources/config.json" // 配置文件路径
-	PathIp     = "/resources/ip.txt"      // ip范围文件路径
-
-	PathSettingProxy   = "/script/setting.bat"
-	PathUnsettingProxy = "/script/unsetting.bat"
-)
-
-// 获取项目所在根路径——main.go所在路径
-// 通过闭包缓存路径
-func getCurrentPath() func() string {
-	mode := env.GetEnv().Mode
-	var currentPath string
-	println(mode)
-	if mode == "debug" {
-		return func() string {
-			if currentPath == "" {
-				_, currentPath, _, _ = runtime.Caller(0)
-				currentPath = currentPath[:strings.LastIndex(currentPath, "util/util.go")-1]
-			}
-			return currentPath
-		}
-	} else {
-		return func() string {
-			if ex, err := os.Executable(); err == nil {
-				return filepath.Dir(ex)
-			}
-			return "./"
-		}
-	}
-
-}
-
-// GetCurrentPath 获取项目所在根路径
-var GetCurrentPath = getCurrentPath()
-
-// GetFilePath
-// 获取所在项目的相对路径
-func GetFilePath(relativePath string) string {
-	return fmt.Sprintf("%s%s", env.GetEnv().WorkDir, relativePath)
-}
 
 // SettingProxy 设置代理
 // port:代理的的口号
