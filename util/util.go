@@ -162,9 +162,9 @@ func OpenBrowser(url string) error {
 	return err
 }
 
-// TrinocularOperation 三目运算符
+// ThreeExp 三目运算符
 // exp 条件表达式
-func TrinocularOperation(exp bool, a, b any) any {
+func ThreeExp(exp bool, a, b any) any {
 	if exp {
 		return a
 	}
