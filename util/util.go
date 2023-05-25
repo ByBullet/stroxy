@@ -2,8 +2,6 @@ package util
 
 import (
 	"fmt"
-	"github.com/nightlyone/lockfile"
-	"go.uber.org/zap"
 	"log"
 	"net"
 	"os"
@@ -14,6 +12,9 @@ import (
 	"strings"
 	"stroxy/env"
 	"stroxy/logger"
+
+	"github.com/nightlyone/lockfile"
+	"go.uber.org/zap"
 )
 
 const (
@@ -159,4 +160,13 @@ func OpenBrowser(url string) error {
 	}
 
 	return err
+}
+
+// TrinocularOperation 三目运算符
+// exp 条件表达式
+func TrinocularOperation(exp bool, a, b any) any {
+	if exp {
+		return a
+	}
+	return b
 }
