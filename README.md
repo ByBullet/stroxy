@@ -10,3 +10,5 @@
 
 ## 开发约定
 1. 为了让path_util.go中的GetCurrentAbPath()能适配环境，项目中不能出现名称为stroxy的文件夹或文件
+2. 所有的TODO用大写
+3. 要调用某些工具时去util包看看，别重复造轮子
