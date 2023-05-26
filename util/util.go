@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"stroxy/logger"
+	"time"
 
 	"github.com/nightlyone/lockfile"
 )
@@ -70,4 +71,18 @@ func ThreeExp(exp bool, a, b any) any {
 		return a
 	}
 	return b
+}
+
+// DelayTime 获取延迟时间
+// address 格式 localhost:22
+// 返回时间单位:毫秒ms
+func DelayTime(address string) (time.Duration, error) {
+	timeout := time.Duration(2 * time.Second)
+	t1 := time.Now()
+	conn, err := net.DialTimeout("tcp", address, timeout)
+	if err != nil {
+		return 0, err
+	}
+	defer conn.Close()
+	return time.Since(t1), nil
 }
