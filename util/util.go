@@ -8,65 +8,10 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"strconv"
 	"stroxy/logger"
 
 	"github.com/nightlyone/lockfile"
-	"go.uber.org/zap"
 )
-
-// SettingProxy 设置代理
-// port:代理的的口号
-// ignore: 不走代理的地址
-func SettingProxy(port int, ignore string) bool {
-	addr := fmt.Sprintf("127.0.0.1:%d", port)
-	switch runtime.GOOS {
-	case "windows":
-		c := exec.Command(GetFilePath(PathSettingProxy), addr, ignore)
-		err := c.Run()
-		if err != nil {
-			log.Println(err)
-			return false
-		}
-	case "darwin":
-		err := onMacProxy("127.0.0.1", strconv.Itoa(port))
-		if err != nil {
-			log.Println(err)
-			return false
-		}
-	//TODO: linux
-	case "linux":
-	default:
-		logger.PROD().Sugar().Errorf("unsupported platform: %s", runtime.GOOS)
-		return false
-	}
-	logger.PROD().Info("成功设置系统代理", zap.String("代理地址", addr))
-	return true
-}
-
-// UnsettingProxy
-// 取消系统代理设置
-func UnsettingProxy() bool {
-	switch runtime.GOOS {
-	case "windows":
-		c := exec.Command(GetFilePath(PathUnsettingProxy))
-		if err := c.Run(); err != nil {
-			log.Println(err)
-			return false
-		}
-	case "darwin":
-		err := offMacProxy()
-		if err != nil {
-			log.Println(err)
-			return false
-		}
-	case "linux":
-	default:
-
-	}
-	logger.PROD().Info("成功取消系统代理")
-	return true
-}
 
 var processLock lockfile.Lockfile
 
