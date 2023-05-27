@@ -1,14 +1,15 @@
 package boot
 
 import (
-	"go.uber.org/zap"
 	"os"
 	"strings"
-	"stroxy/config"
+	"stroxy/client/config"
+	"stroxy/client/local"
 	"stroxy/env"
-	"stroxy/local"
 	"stroxy/logger"
 	"stroxy/util"
+
+	"go.uber.org/zap"
 )
 
 var localServer *local.Listener

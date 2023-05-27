@@ -3,12 +3,14 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
+	"path/filepath"
 	"reflect"
 	"strconv"
 	"stroxy/logger"
 	"stroxy/util"
+
+	"go.uber.org/zap"
 )
 
 const (
@@ -91,17 +93,32 @@ func (cg *Group) flushToFile() {
 
 var ProductConfigGroup *Group
 
+/*
+Init 初始化config模块
+为了适配开发环境和发布环境，配置文件可以放在两个位置，
+分别是 .../stroxy/client/resources/config.json和.../stroxy/resources/config.json
+第二种情况在发布环境
+*/
 func Init() {
-	if f, err := os.Open(util.GetFilePath(util.PathConfig)); err == nil {
-		defer f.Close()
-		ProductConfigGroup = new(Group)
-		decode := json.NewDecoder(f)
-		_ = decode.Decode(ProductConfigGroup)
-		ProductConfigGroup.buildServerAddr()
-		logger.PROD().Info("config 模块初始化完成")
-		configContent, _ := json.MarshalIndent(ProductConfigGroup, "", "  ")
-		logger.PROD().Sugar().Debug("配置信息 %s", string(configContent))
-	} else {
-		log.Fatalf("err: %v\n", err)
+
+	var configFile *os.File
+	var err error
+	configFilePath := filepath.Join(util.GetCurrentAbPath(), "resources/config.json")
+	if configFile, err = os.Open(configFilePath); err != nil {
+		configFilePath = filepath.Join(util.GetCurrentAbPath(), "client/resources/config.json")
+		if configFile, err = os.Open(configFilePath); err != nil {
+			logger.PROD().Error("配置文件读取异常", zap.Error(err))
+			return
+		}
 	}
+	defer configFile.Close()
+
+	ProductConfigGroup = new(Group)
+	decode := json.NewDecoder(configFile)
+	_ = decode.Decode(ProductConfigGroup)
+	ProductConfigGroup.buildServerAddr()
+	logger.PROD().Info("config 模块初始化完成")
+	configContent, _ := json.MarshalIndent(ProductConfigGroup, "", "  ")
+	logger.PROD().Sugar().Debug("配置信息 %s", string(configContent))
+
 }

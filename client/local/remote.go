@@ -3,11 +3,12 @@ package local
 import (
 	"crypto/tls"
 	"fmt"
+	"log"
+	"stroxy/client/config"
+	"stroxy/logger"
+
 	"go.uber.org/zap"
 	"golang.org/x/net/websocket"
-	"log"
-	"stroxy/config"
-	"stroxy/logger"
 )
 
 // 完成与代理服务器的握手,如果链接失败就返回nil

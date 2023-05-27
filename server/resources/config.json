@@ -1,0 +1,28 @@
+{
+    "ServerPort":65533,
+    "Domain":"masterliu.fun",
+    "ServerNodes":{
+        "sp":{
+            "Description":"新加坡节点",
+            "DomainPrefix":"sp",
+            "KeyFile":"resources/keys/9534033_sp.masterliu.fun_apache/9534033_sp.masterliu.fun.key",
+            "PublicCrtFile":"resources/keys/9534033_sp.masterliu.fun_apache/9534033_sp.masterliu.fun_public.crt",
+            "MaxProcess":8
+        },
+        "hk":{
+            "Description":"香港节点",
+            "DomainPrefix":"www",
+            "KeyFile":"resources/keys/9347917_www.masterliu.fun_apache/9347917_www.masterliu.fun.key",
+            "PublicCrtFile":"resources/keys/9347917_www.masterliu.fun_apache/9347917_www.masterliu.fun_public.crt",
+            "MaxProcess":8
+        },
+        "test":{
+            "Description":"本地测试节点",
+            "DomainPrefix":"test",
+            "KeyFile":"resources/keys/9718061_test.masterliu.fun_apache/9718061_test.masterliu.fun.key",
+            "PublicCrtFile":"resources/keys/9718061_test.masterliu.fun_apache/9718061_test.masterliu.fun_public.crt",
+            "MaxProcess":2
+        }
+    },
+    "DefaultServerNode":"test"
+}
