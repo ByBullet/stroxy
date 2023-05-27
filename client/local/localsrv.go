@@ -2,13 +2,14 @@ package local
 
 import (
 	"fmt"
-	"go.uber.org/zap"
 	"io"
 	"net"
 	"strconv"
 	"strings"
-	"stroxy/config"
+	"stroxy/client/config"
 	"stroxy/logger"
+
+	"go.uber.org/zap"
 )
 
 type Listener struct {
