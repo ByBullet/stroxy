@@ -8,8 +8,9 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"stroxy/logger"
 	"time"
+
+	"github.com/ByBullet/stroxy/logger"
 
 	"github.com/nightlyone/lockfile"
 )

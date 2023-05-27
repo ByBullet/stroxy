@@ -1,9 +1,10 @@
 package main
 
 import (
+	"github.com/ByBullet/stroxy/client"
+	"github.com/ByBullet/stroxy/client/config"
+
 	"github.com/getlantern/systray"
-	"stroxy/boot"
-	"stroxy/config"
 )
 
 // 启动GUI系统托盘
@@ -25,7 +26,7 @@ func addNodeItem(mNode *systray.MenuItem) {
 
 		go func(name string, menu *systray.MenuItem) {
 			for range curNodeMenu.ClickedCh {
-				boot.SelectNode(name)
+				client.SelectNode(name)
 				defaultNodeMenu.Enable()
 				menu.Disable()
 				defaultNodeMenu = menu
@@ -69,23 +70,23 @@ func onReady() {
 		for {
 			select {
 			case <-mRun.ClickedCh:
-				boot.RunProxy()
+				client.RunProxy()
 				mRun.Disable()
 				mNode.Disable()
 				mStop.Enable()
 			case <-mStop.ClickedCh:
-				boot.StopProxy()
+				client.StopProxy()
 				mRun.Enable()
 				mNode.Enable()
 				mStop.Disable()
 			case <-autoProxyMenu.ClickedCh:
 				autoProxyMenu.Disable()
 				allProxyMenu.Enable()
-				boot.SelectProxyMode("auto")
+				client.SelectProxyMode("auto")
 			case <-allProxyMenu.ClickedCh:
 				allProxyMenu.Disable()
 				autoProxyMenu.Enable()
-				boot.SelectProxyMode("all")
+				client.SelectProxyMode("all")
 			case <-mQuit.ClickedCh:
 				systray.Quit()
 				return
@@ -96,5 +97,5 @@ func onReady() {
 }
 
 func onExit() {
-	boot.ExitSystem()
+	client.ExitSystem()
 }

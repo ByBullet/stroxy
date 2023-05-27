@@ -2,15 +2,16 @@ package local
 
 import (
 	"bufio"
-	"go.uber.org/zap"
 	"io"
 	"log"
 	"net"
 	"os"
 	"strconv"
 	"strings"
-	"stroxy/logger"
-	"stroxy/util"
+
+	"github.com/ByBullet/stroxy/logger"
+	"github.com/ByBullet/stroxy/util"
+	"go.uber.org/zap"
 )
 
 // IpLimit

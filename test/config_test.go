@@ -1,10 +1,11 @@
 package test
 
 import (
-	client_config "stroxy/client/config"
-	"stroxy/logger"
-	server_config "stroxy/server/config"
 	"testing"
+
+	client_config "github.com/ByBullet/stroxy/client/config"
+	"github.com/ByBullet/stroxy/logger"
+	server_config "github.com/ByBullet/stroxy/server/config"
 )
 
 func TestMain(m *testing.M) {

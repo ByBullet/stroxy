@@ -7,8 +7,9 @@ import (
 	"path/filepath"
 	"reflect"
 	"strconv"
-	"stroxy/logger"
-	"stroxy/util"
+
+	"github.com/ByBullet/stroxy/logger"
+	"github.com/ByBullet/stroxy/util"
 
 	"go.uber.org/zap"
 )

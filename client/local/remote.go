@@ -4,8 +4,9 @@ import (
 	"crypto/tls"
 	"fmt"
 	"log"
-	"stroxy/client/config"
-	"stroxy/logger"
+
+	"github.com/ByBullet/stroxy/client/config"
+	"github.com/ByBullet/stroxy/logger"
 
 	"go.uber.org/zap"
 	"golang.org/x/net/websocket"

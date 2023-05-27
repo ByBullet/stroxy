@@ -1,4 +1,4 @@
-module stroxy
+module github.com/ByBullet/stroxy
 
 go 1.20
 

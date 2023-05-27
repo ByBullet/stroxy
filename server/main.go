@@ -5,9 +5,10 @@ import (
 	"net/http"
 	"path/filepath"
 	"runtime"
-	"stroxy/logger"
-	"stroxy/server/config"
-	"stroxy/util"
+
+	"github.com/ByBullet/stroxy/logger"
+	"github.com/ByBullet/stroxy/server/config"
+	"github.com/ByBullet/stroxy/util"
 
 	"time"
 

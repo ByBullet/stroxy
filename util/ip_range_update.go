@@ -6,7 +6,8 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"stroxy/logger"
+
+	"github.com/ByBullet/stroxy/logger"
 
 	"github.com/PuerkitoBio/goquery"
 )

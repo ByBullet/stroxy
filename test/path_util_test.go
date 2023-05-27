@@ -3,8 +3,9 @@ package test
 import (
 	"path"
 	"runtime"
-	"stroxy/util"
 	"testing"
+
+	"github.com/ByBullet/stroxy/util"
 )
 
 func TestGetCurrentAbPath(t *testing.T) {

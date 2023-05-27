@@ -1,10 +1,11 @@
 package logger
 
 import (
+	"log"
+
+	"github.com/ByBullet/stroxy/env"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"log"
-	"stroxy/env"
 )
 
 var prodLogger *zap.Logger

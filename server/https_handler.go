@@ -4,8 +4,9 @@ import (
 	"io"
 	"net"
 	"strings"
-	"stroxy/logger"
 	"time"
+
+	"github.com/ByBullet/stroxy/logger"
 
 	"github.com/juju/ratelimit"
 	"go.uber.org/zap"

@@ -9,7 +9,8 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"stroxy/logger"
+
+	"github.com/ByBullet/stroxy/logger"
 )
 
 type ProxySetting interface {

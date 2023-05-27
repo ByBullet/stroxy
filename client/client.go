@@ -1,13 +1,14 @@
-package boot
+package client
 
 import (
 	"os"
 	"strings"
-	"stroxy/client/config"
-	"stroxy/client/local"
-	"stroxy/env"
-	"stroxy/logger"
-	"stroxy/util"
+
+	"github.com/ByBullet/stroxy/client/config"
+	"github.com/ByBullet/stroxy/client/local"
+	"github.com/ByBullet/stroxy/env"
+	"github.com/ByBullet/stroxy/logger"
+	"github.com/ByBullet/stroxy/util"
 
 	"go.uber.org/zap"
 )
