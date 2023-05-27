@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/ByBullet/stroxy/logger"
@@ -30,8 +31,8 @@ func GotIpRange() error {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	f, err := os.Create(GetFilePath(PathIp))
+	ipFilePath := filepath.Join(GetResourcesPath("client"), "ip.txt")
+	f, err := os.Create(ipFilePath)
 	if err != nil {
 		return err
 	}

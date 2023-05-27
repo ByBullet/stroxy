@@ -15,16 +15,7 @@ const modName = "stroxy"
 const (
 	PathConfig = "/resources/config.json" // 配置文件路径
 	PathIp     = "/resources/ip.txt"      // ip范围文件路径
-
-	PathSettingProxy   = "/script/setting.bat"
-	PathUnsettingProxy = "/script/unsetting.bat"
 )
-
-// GetFilePath
-// 获取所在项目的相对路径
-func GetFilePath(relativePath string) string {
-	return fmt.Sprintf("%s%s", GetCurrentAbPath(), relativePath)
-}
 
 // GetCurrentAbPath 获取项目的跟路径
 func GetCurrentAbPath() string {
@@ -56,4 +47,23 @@ func getCurrentAbPathByCaller() string {
 		abPath = path.Dir(filename)
 	}
 	return path.Dir(abPath)
+}
+
+// fileExists 判断所给路径文件/文件夹是否存在
+func fileExists(path string) bool {
+	_, err := os.Stat(path) //os.Stat获取文件信息
+	if err != nil {
+		return os.IsExist(err)
+	}
+	return true
+}
+
+// GetResourcesPath 客户端获取resources文件夹目录
+func GetResourcesPath(m string) string {
+	rootPath := GetCurrentAbPath()
+	resourcesDir := filepath.Join(rootPath, "resources")
+	if !fileExists(resourcesDir) {
+		resourcesDir = filepath.Join(rootPath, m+"/resources")
+	}
+	return resourcesDir
 }

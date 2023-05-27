@@ -47,7 +47,7 @@ func createServer() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	logger.PROD().Info("run server on", zap.Int("port", config.CONF().ServerPort))
-	contextPath := util.GetCurrentAbPath()
+	contextPath := util.GetResourcesPath("server")
 	publicCrtPath := filepath.Join(contextPath, config.CONF().CurNode.PublicCrtFile)
 	keyPath := filepath.Join(contextPath, config.CONF().CurNode.KeyFile)
 	err := s.ListenAndServeTLS(publicCrtPath, keyPath)

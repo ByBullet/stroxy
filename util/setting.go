@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"path"
+	"path/filepath"
 	"runtime"
 	"strconv"
 	"strings"
@@ -39,7 +39,7 @@ runWinBatScript 执行windows的bat脚本
 在临时目录下创建名为stroxy.bat的脚本，然后执行，执行完成后就删除脚本
 */
 func runWinBatScript(content string) error {
-	s := path.Join(os.TempDir(), "stroxy.bat")
+	s := filepath.Join(os.TempDir(), "stroxy.bat")
 	f, err := os.Create(s)
 	if err != nil {
 		return err

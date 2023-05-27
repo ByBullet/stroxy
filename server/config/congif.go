@@ -38,15 +38,12 @@ Init 初始化config模块
 .../stroxy/resources/config.json
 */
 func Init() {
-	configFilePath := filepath.Join(util.GetCurrentAbPath(), "resources/config.json")
+	configFilePath := filepath.Join(util.GetResourcesPath("server"), "config.json")
 	var configFile *os.File
 	var err error
 	if configFile, err = os.Open(configFilePath); err != nil {
-		configFilePath = filepath.Join(util.GetCurrentAbPath(), "server/resources/config.json")
-		if configFile, err = os.Open(configFilePath); err != nil {
-			logger.PROD().Error("配置文件读取异常", zap.Error(err))
-			return
-		}
+		logger.PROD().Error("配置文件读取异常", zap.Error(err))
+		return
 	}
 	defer configFile.Close()
 

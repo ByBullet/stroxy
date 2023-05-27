@@ -48,7 +48,8 @@ type Group struct {
 
 // 提供配置文件的自动打开和关闭，实际的文件操作通过回调f()实现
 func fileOperate(f func(file *os.File)) {
-	if file, err := os.Create(util.GetFilePath(util.PathConfig)); err == nil {
+	configFilePath := filepath.Join(util.GetResourcesPath("client"), "config.json")
+	if file, err := os.Create(configFilePath); err == nil {
 		defer file.Close()
 		f(file)
 	} else {
@@ -104,13 +105,10 @@ func Init() {
 
 	var configFile *os.File
 	var err error
-	configFilePath := filepath.Join(util.GetCurrentAbPath(), "resources/config.json")
+	configFilePath := filepath.Join(util.GetResourcesPath("client"), "config.json")
 	if configFile, err = os.Open(configFilePath); err != nil {
-		configFilePath = filepath.Join(util.GetCurrentAbPath(), "client/resources/config.json")
-		if configFile, err = os.Open(configFilePath); err != nil {
-			logger.PROD().Error("配置文件读取异常", zap.Error(err))
-			return
-		}
+		logger.PROD().Error("配置文件读取异常", zap.Error(err))
+		return
 	}
 	defer configFile.Close()
 

@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -77,7 +78,8 @@ func ipToInt(ip string) int {
 func InitLimit() {
 	localIpLimit = new(IpLimit)
 	localIpLimit.limit = make([][]int, 0)
-	file, err := os.OpenFile(util.GetFilePath(util.PathIp), os.O_RDONLY, 0600)
+	ipFilePath := filepath.Join(util.GetResourcesPath("client"), "ip.txt")
+	file, err := os.OpenFile(ipFilePath, os.O_RDONLY, 0600)
 	if err != nil {
 		log.Println(err)
 		return
