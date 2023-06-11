@@ -24,26 +24,24 @@ const (
 )
 
 type ProxyServer struct {
-	Name, DomainPrefix string
-	Port               int
+	Name, ProxyOrigin, ProxyUrl string
+	Port                        int
 }
 
 // Group
 // 解析和处理配置文件
 type Group struct {
-	ProxyServerAddrTemplate string
-	ProxyOriginTemplate     string
-	ProxyServerAddr         string //代理服务器连接url
-	ProxyOrigin             string //代理服务器连接头中的origin
-	ProxyServerMap          map[string]ProxyServer
-	DefaultServer           string
-	LocalPort               int    //本地监听端口
-	ProxyModel              string //代理模式
-	SkipVerify              bool   //跳过tls双向认证
-	IpDate                  string //ip.txt更新时间
-	WebsiteAddr             string //官网地址
-	Auth                    string //身份信息
-	IgnoreAddress           []string
+	ProxyUrl       string //代理服务器连接url
+	ProxyOrigin    string //代理服务器连接头中的origin
+	ProxyServerMap map[string]ProxyServer
+	DefaultServer  string
+	LocalPort      int    //本地监听端口
+	ProxyModel     string //代理模式
+	SkipVerify     bool   //跳过tls双向认证
+	IpDate         string //ip.txt更新时间
+	WebsiteAddr    string //官网地址
+	Auth           string //身份信息
+	IgnoreAddress  []string
 }
 
 // 提供配置文件的自动打开和关闭，实际的文件操作通过回调f()实现
@@ -80,8 +78,8 @@ func (cg *Group) SetConfigArg(argName, value string) {
 
 func (cg *Group) buildServerAddr() {
 	defaultServer := cg.ProxyServerMap[cg.DefaultServer]
-	cg.ProxyServerAddr = fmt.Sprintf(cg.ProxyServerAddrTemplate, defaultServer.DomainPrefix, defaultServer.Port)
-	cg.ProxyOrigin = fmt.Sprintf(cg.ProxyOriginTemplate, defaultServer.DomainPrefix, defaultServer.Port)
+	cg.ProxyUrl = defaultServer.ProxyUrl
+	cg.ProxyOrigin = defaultServer.ProxyOrigin
 }
 
 // 把内存中修改的配置写回到文件

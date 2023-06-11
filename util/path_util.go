@@ -1,7 +1,6 @@
 package util
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path"
@@ -26,7 +25,7 @@ func GetCurrentAbPath() string {
 	if dir[len(dir)-1] != '/' {
 		dir += "/"
 	}
-	return dir[:strings.LastIndex(dir, fmt.Sprintf("/%s", modName))+len(modName)+1]
+	return dir[:strings.LastIndex(dir, modName)+len(modName)+1]
 }
 
 // getCurrentAbPathByExecutable 获取当前执行文件绝对路径

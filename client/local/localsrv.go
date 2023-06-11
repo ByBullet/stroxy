@@ -128,7 +128,7 @@ func handleProcess(c net.Conn, pac bool) {
 			targetConn = tempConn
 		} else { //走代理
 			logger.PROD().Debug("代理连接", zap.String("协议", "https"), zap.String("地址", destAddr))
-			tempConn := connectProxyServer(config.ProductConfigGroup.ProxyServerAddr, config.ProductConfigGroup.ProxyOrigin, destAddr)
+			tempConn := connectProxyServer(config.ProductConfigGroup.ProxyUrl, config.ProductConfigGroup.ProxyOrigin, destAddr)
 			if tempConn == nil {
 				_ = c.Close()
 				return
@@ -152,7 +152,7 @@ func handleProcess(c net.Conn, pac bool) {
 			targetConn = tempConn
 		} else { //走代理
 			logger.PROD().Debug("代理连结", zap.String("协议", "http"), zap.String("地址", destAddr))
-			tempConn := connectProxyServer(config.ProductConfigGroup.ProxyServerAddr, config.ProductConfigGroup.ProxyOrigin, destAddr)
+			tempConn := connectProxyServer(config.ProductConfigGroup.ProxyUrl, config.ProductConfigGroup.ProxyOrigin, destAddr)
 			if tempConn == nil {
 				logger.PROD().Error("代理服务器目标访问失败", zap.String("协议", "http"), zap.String("地址", destAddr), zap.Error(err))
 				_ = c.Close()
