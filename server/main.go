@@ -47,10 +47,15 @@ func createServer() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	logger.PROD().Info("run server on", zap.Int("port", config.CONF().ServerPort))
-	contextPath := util.GetResourcesPath("server")
-	publicCrtPath := filepath.Join(contextPath, config.CONF().CurNode.PublicCrtFile)
-	keyPath := filepath.Join(contextPath, config.CONF().CurNode.KeyFile)
-	err := s.ListenAndServeTLS(publicCrtPath, keyPath)
+	var err error
+	if config.CONF().CurNode.TLS {
+		contextPath := util.GetResourcesPath("server")
+		publicCrtPath := filepath.Join(contextPath, config.CONF().CurNode.PublicCrtFile)
+		keyPath := filepath.Join(contextPath, config.CONF().CurNode.KeyFile)
+		err = s.ListenAndServeTLS(publicCrtPath, keyPath)
+	} else {
+		err = s.ListenAndServe()
+	}
 	logger.PROD().Error("服务器启动失败", zap.Error(err))
 }
 

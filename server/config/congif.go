@@ -12,8 +12,7 @@ import (
 )
 
 type ServerNode struct {
-	Description   string
-	DomainPrefix  string
+	TLS           bool
 	KeyFile       string
 	PublicCrtFile string
 	MaxProcess    int

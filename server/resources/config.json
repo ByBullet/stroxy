@@ -1,28 +1,18 @@
 {
-    "ServerPort":65533,
-    "Domain":"masterliu.fun",
+    "ServerPort":443,
     "ServerNodes":{
-        "sp":{
-            "Description":"新加坡节点",
-            "DomainPrefix":"sp",
-            "KeyFile":"keys/9534033_sp.masterliu.fun_apache/9534033_sp.masterliu.fun.key",
-            "PublicCrtFile":"keys/9534033_sp.masterliu.fun_apache/9534033_sp.masterliu.fun_public.crt",
-            "MaxProcess":8
-        },
-        "hk":{
-            "Description":"香港节点",
-            "DomainPrefix":"www",
-            "KeyFile":"keys/9347917_www.masterliu.fun_apache/9347917_www.masterliu.fun.key",
-            "PublicCrtFile":"keys/9347917_www.masterliu.fun_apache/9347917_www.masterliu.fun_public.crt",
-            "MaxProcess":8
-        },
-        "test":{
-            "Description":"本地测试节点",
-            "DomainPrefix":"test",
+        "test_https":{
+            "TLS":true,
             "KeyFile":"keys/9718061_test.masterliu.fun_apache/9718061_test.masterliu.fun.key",
             "PublicCrtFile":"keys/9718061_test.masterliu.fun_apache/9718061_test.masterliu.fun_public.crt",
             "MaxProcess":2
+        },
+        "test_http":{
+            "TLS":false,
+            "KeyFile":"",
+            "PublicCrtFile":"",
+            "MaxProcess":4
         }
     },
-    "DefaultServerNode":"test"
+    "DefaultServerNode":"test_http"
 }
